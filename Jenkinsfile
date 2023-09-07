@@ -1,6 +1,7 @@
 pipeline {
   tools {
     maven 'maven'
+    docker 'docker'
   }
   agent any
     stages {
