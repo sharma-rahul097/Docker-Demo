@@ -1,4 +1,7 @@
 pipeline {
+  tools {
+    maven 'maven'
+  }
   agent any
     stages {
         stage('Checkout') {
@@ -8,9 +11,6 @@ pipeline {
         }
         
     stage('Maven build') {
-          agent {
-    	      label "maven"
-          }
           steps {  
      	      script { 
                sh 'mvn install'
