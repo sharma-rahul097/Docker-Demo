@@ -9,13 +9,13 @@ pipeline {
         
     stage('Maven build') {
           agent {
-    				label "maven"
-    			}
-          steps {  
-            script { 
-               sh 'mvn install'
-            }
-          }
+    	label "maven"
+      }
+steps {  
+     	script { 
+           sh 'mvn install'
+        }
+      }
         }
       
     stage('Build image') {
