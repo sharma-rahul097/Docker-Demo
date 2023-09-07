@@ -8,11 +8,14 @@ pipeline {
         }
         
     stage('Maven build') {
-            steps {  
-        script { 
-                sh 'mvn install'
-              }
+          agent {
+    				label "maven"
+    			}
+          steps {  
+            script { 
+               sh 'mvn install'
             }
+          }
         }
       
     stage('Build image') {
