@@ -29,7 +29,7 @@ pipeline {
       
     stage('Deploy to Cluster') {
           steps {
-                    sh 'envsubst < ${WORKSPACE}/config_server_deployment.yaml | kubectl apply -f -'
+                    sh 'kubectl apply -f ${WORKSPACE}/config_server_deployment.yaml'
           }
       }
   }
