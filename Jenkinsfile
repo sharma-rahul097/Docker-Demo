@@ -2,6 +2,9 @@ pipeline {
   tools {
     maven 'maven'
   }
+  environment {
+     REPOSITORY_TAG="rshar123/parivesh2_dev:${BUILD_NUMBER}"
+   }
   agent any
     stages {
         stage('Checkout') {
@@ -20,13 +23,12 @@ pipeline {
 
     stage('Build and Push Docker Image') {
       environment {
-        DOCKER_IMAGE = "rshar123/parivesh2_dev:${BUILD_NUMBER}"
         REGISTRY_CREDENTIALS = credentials('docker-cred')
       }
       steps {
         script {
             sh 'docker build -t ${DOCKER_IMAGE} .'
-            def dockerImage = docker.image("${DOCKER_IMAGE}")
+            def dockerImage = docker.image("${REPOSITORY_TAG}")
             docker.withRegistry('https://registry.hub.docker.com', "docker-cred") {
                 dockerImage.push()
             }
