@@ -20,7 +20,7 @@ pipeline {
 
     stage('Build and Push Docker Image') {
       environment {
-        DOCKER_IMAGE = "rohitkr115/parivesh2_dev:${BUILD_NUMBER}"
+        DOCKER_IMAGE = "rshar123/parivesh2_dev:${BUILD_NUMBER}"
         REGISTRY_CREDENTIALS = credentials('docker-cred')
       }
       steps {
@@ -36,7 +36,7 @@ pipeline {
     stage('Deploying parivesh-backend container to Kubernetes') {
       steps {
         script {
-          kubernetesDeploy(configs: "parivesh2_dev_deployment.yml", "parivesh2_dev_service.yml")
+          kubernetesDeploy(configs: "config_server_deployment.yml", "config_server_service.yml")
         }
       }
     }
