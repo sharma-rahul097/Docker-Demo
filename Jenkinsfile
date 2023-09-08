@@ -21,20 +21,12 @@ pipeline {
           }
         }
 
-    stage('Build and Push Docker Image') {
-      environment {
-        REGISTRY_CREDENTIALS = credentials('docker-cred')
-      }
-      steps {
-        script {
-            sh 'docker build -t ${REPOSITORY_TAG} .'
-            def dockerImage = docker.image("${REPOSITORY_TAG}")
-            docker.withRegistry('https://registry.hub.docker.com', "docker-cred") {
-                dockerImage.push()
-            }
-        }
-      }
+    stage('Build and Push Image') {
+         steps {
+           sh 'docker image build -t ${REPOSITORY_TAG} .'
+         }
     }
+      
     stage('Deploy to Cluster') {
           steps {
                     sh 'envsubst < ${WORKSPACE}/config_server_deployment.yaml | kubectl apply -f -'
