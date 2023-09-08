@@ -33,12 +33,10 @@ pipeline {
         }
       }
     }
-    stage('Deploying parivesh-backend container to Kubernetes') {
-      steps {
-        script {
-          kubernetesDeploy(configs: "config_server_deployment.yml", "config_server_service.yml")
-        }
+    stage('Deploy to Cluster') {
+          steps {
+                    sh 'envsubst < ${WORKSPACE}/config_server_deployment.yaml | kubectl apply -f -'
+          }
       }
-    }
   }
 }
