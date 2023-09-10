@@ -32,6 +32,7 @@ pipeline {
          -Dsonar.sources=src/ \
          -Dsonar.java.binaries=target/classes/ \
          -Dsonar.exclusions=src/test/java/****/*.java \
+         -Dsonar.java.libraries=/root/.m2/**/*.jar
          -Dsonar.projectVersion=${BUILD_NUMBER}-test'''
        }
      }
